@@ -2,31 +2,32 @@
   <div class="detail">
     <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
-                <h4 class="weui-media-box__title">摩拜单车微信免密支付</h4>
-                <p class="weui-media-box__desc">北京摩拜科技有限公司</p>
+                <h4 class="weui-media-box__title">{{orderDetail.bussinessName}}</h4>
+                <p class="weui-media-box__desc">{{orderDetail.description}}</p>
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">当前状态</label>
-                    <span class="weui-form-preview__value">生效中</span>
+                    <span class="weui-form-preview__value">{{orderDetail.state}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">签约时间</label>
-                    <span class="weui-form-preview__value">2020</span>
+                    <span class="weui-form-preview__value">{{orderDetail.createAt | formatDate}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">开通账号</label>
-                    <span class="weui-form-preview__value">小明</span>
+                    <span class="weui-form-preview__value">{{orderDetail.userName}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">扣款方式</label>
-                    <span class="weui-form-preview__value">零钱
-                      <a href="javascript:;" @click="goToDeductionWay">修改</a>
+                    <span class="weui-form-preview__value">
+                      {{payWayMap[orderDetail.payId]}}
+                      <a href="javascript:;" @click="goToDeductionWay()">修改</a>
                     </span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">详情</label>
-                    <span class="weui-form-preview__value">很长</span>
+                    <span class="weui-form-preview__value">{{orderDetail.remarks}}</span>
                 </div>
             </div>
             <div class="weui-form-preview__ft">
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -49,32 +51,47 @@ export default {
   name: 'Detail',
   data () {
     return {
-      name: '知乎严选会员'
+      orderDetail: {}
     }
   },
+  created () {
+    this.initPage()
+  },
+  computed: {
+    ...mapGetters('userInfo', ['payWayMap'])
+  },
   methods: {
+    async initPage () {
+      const id = this.$route.query.id
+      const data = await this.$request.getOrderDetailById({ id })
+      this.orderDetail = data
+    },
     showCloseDialog () {
       this.$confirm(`是否确认关闭${this.name}`, {
         buttons: [{
           label: '取消',
-          type: 'default',
-          onClick () {
-
-          }
+          type: 'default'
         }, {
           label: '仍要关闭',
           type: 'primary',
-          onClick () {
-
+          onClick: () => {
+            this.confirmCloseOrder()
           }
         }]
       })
     },
+    async confirmCloseOrder () {
+      const id = this.$route.query.id
+      await this.$request.closeOrder({ id })
+      this.$router.push('/List')
+    },
     goToRecordList () {
-      this.$router.push('/RecordList')
+      const id = this.$route.query.id
+      this.$router.push(`/RecordList?id=${id}`)
     },
     goToDeductionWay () {
-      this.$router.push('/DeductionWay')
+      const { id, payId } = this.$route.query
+      this.$router.push(`/DeductionWay?id=${id}&payId=${payId}`)
     }
   }
 }
