@@ -20,7 +20,10 @@ export default {
     return axios.get('/order/detail', { params })
   },
   getDeductionRecordsByOrderId (params) {
-    return axios.get('/order/record/list', { params })
+    return axios.get('/record/list', { params })
+  },
+  createRecord (data) {
+    return axios.post('/record/create', data)
   },
   closeOrder (params) {
     return axios.get('/order/close', { params })

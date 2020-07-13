@@ -12,7 +12,7 @@
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">签约时间</label>
-                    <span class="weui-form-preview__value">{{orderDetail.createAt | formatDate}}</span>
+                    <span class="weui-form-preview__value">{{orderDetail.meta.createAt | formatDate}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">开通账号</label>
@@ -67,7 +67,7 @@ export default {
       this.orderDetail = data
     },
     showCloseDialog () {
-      this.$confirm(`是否确认关闭${this.name}`, {
+      this.$confirm(`是否确认关闭${this.orderDetail.bussinessName}`, {
         buttons: [{
           label: '取消',
           type: 'default'

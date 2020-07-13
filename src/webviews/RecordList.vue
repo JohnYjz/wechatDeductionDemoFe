@@ -10,7 +10,7 @@
                         <div class="weui-cell__hd"></div>
                         <div class="weui-cell__bd weui-cell_primary">
                           <h4 class="weui-media-box__title">{{record.bussinessName}}</h4>
-                          <p class="weui-media-box__desc">{{record.createAt | formatDate}}</p>
+                          <p class="weui-media-box__desc">{{record.meta.createAt | formatDate}}</p>
                         </div>
                         <span class="weui-cell__ft">
                           {{record.amount}}
@@ -22,6 +22,15 @@
       </div>
     </div>
     <p v-else class="hint-text center">没有记录</p>
+    <div class="button-sp-area cell weui-footer_fixed-bottom">
+      <div class="weui-cell weui-cell_active record-list-mock-new">
+        <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
+        <div class="weui-cell__bd">
+            <input id="js_input" class="weui-input" placeholder="输入金额（数字）" v-model="amount"/>
+        </div>
+      </div>
+      <a href="javascript:" class="weui-btn_cell weui-btn_cell-default" @click="create">点击添加一条记录（mock）</a>
+    </div>
   </div>
 </template>
 
@@ -30,7 +39,8 @@ export default {
   name: 'RecordList',
   data () {
     return {
-      records: []
+      records: [],
+      amount: ''
     }
   },
   created () {
@@ -41,12 +51,24 @@ export default {
       const id = this.$route.query.id
       const data = await this.$request.getDeductionRecordsByOrderId({ id })
       this.records = data
+    },
+    async create () {
+      const id = this.$route.query.id
+      const data = {
+        order: id,
+        amount: this.amount
+      }
+      await this.$request.createRecord(data)
+      this.initPage()
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
+.record-list-mock-new {
+  background-color: white;
+}
 .record-list-title {
   padding: 0 15px;
   line-height: 2;
