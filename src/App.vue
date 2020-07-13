@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <BasePage>
-      <router-view/>
+      <router-view :key="key"/>
     </BasePage>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
   name: 'App',
   components: {
     BasePage
+  },
+  computed: {
+    key () {
+      return this.$route.fullPath
+    }
   }
 }
 </script>

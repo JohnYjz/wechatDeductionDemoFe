@@ -57,8 +57,9 @@ export default {
       this.form.payId = id
     },
     async confirm () {
-      await this.$request.editDeductionWay(this.form)
-      this.$router.push('/')
+      const res = await this.$request.editDeductionWay(this.form)
+      this.form.payId = res.payId
+      this.$router.push(`/detail?id=${res._id}&payId=${res.payId}`)
     }
   }
 }

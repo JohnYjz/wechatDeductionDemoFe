@@ -2,21 +2,27 @@ import axios from './axios'
 
 export default {
   getUserInfo () {
-    return axios.get('/login')
+    return axios.get('/user/info')
   },
   createDeduction (data) {
-    return axios.post('/create', data)
+    return axios.post('/order/create', data)
   },
   editDeductionWay (data) {
-    return axios.post('/deduction/edit', data)
+    return axios.post('/order/edit', data)
   },
   getDeductionOrders () {
-    return axios.get('/deductionList')
+    return axios.get('/order/list/valid')
+  },
+  getDeductionCloseOrders () {
+    return axios.get('/order/list/close')
+  },
+  getDeductionOrderDetail (params) {
+    return axios.get('/order/detail', { params })
   },
   getDeductionRecordsByOrderId (params) {
-    return axios.get('/deductionRecordList', { params })
+    return axios.get('/order/record/list', { params })
   },
   closeOrder (params) {
-    return axios.get('/closeOrder', { params })
+    return axios.get('/order/close', { params })
   }
 }

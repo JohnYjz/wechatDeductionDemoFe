@@ -13,6 +13,18 @@
                   <input id="js_input" class="weui-input" v-model="form.bussinessName" placeholder="输入商家名称"/>
               </div>
             </div>
+            <div class="weui-cell weui-cell_active">
+              <div class="weui-cell__hd"><label class="weui-label">描述</label></div>
+              <div class="weui-cell__bd">
+                  <input id="js_input" class="weui-input" v-model="form.description" placeholder="输入商家名称"/>
+              </div>
+            </div>
+            <div class="weui-cell weui-cell_active">
+              <div class="weui-cell__hd"><label class="weui-label">备注</label></div>
+              <div class="weui-cell__bd">
+                  <input id="js_input" class="weui-input" v-model="form.remarks" placeholder="输入商家名称"/>
+              </div>
+            </div>
             <div class="weui-cell weui-cell_active" @click="showDeductionWayActionSheet">
               <div class="weui-cell__hd"><label class="weui-label">扣费方式</label></div>
                 <div class="weui-cell__bd">
@@ -36,6 +48,8 @@ import { mapGetters } from 'vuex'
 
 const deafultForm = {
   payId: '',
+  description: '',
+  remarks: '',
   bussinessName: ''
 }
 

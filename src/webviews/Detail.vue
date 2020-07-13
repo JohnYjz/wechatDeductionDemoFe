@@ -16,7 +16,7 @@
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">开通账号</label>
-                    <span class="weui-form-preview__value">{{orderDetail.userName}}</span>
+                    <span class="weui-form-preview__value">{{orderDetail.user.userName}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">扣款方式</label>
@@ -63,7 +63,7 @@ export default {
   methods: {
     async initPage () {
       const id = this.$route.query.id
-      const data = await this.$request.getOrderDetailById({ id })
+      const data = await this.$request.getDeductionOrderDetail({ id })
       this.orderDetail = data
     },
     showCloseDialog () {
@@ -83,7 +83,7 @@ export default {
     async confirmCloseOrder () {
       const id = this.$route.query.id
       await this.$request.closeOrder({ id })
-      this.$router.push('/List')
+      this.$router.push('/')
     },
     goToRecordList () {
       const id = this.$route.query.id

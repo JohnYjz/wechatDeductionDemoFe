@@ -5,15 +5,26 @@ import Detail from '@/webviews/Detail'
 import DeductionWay from '@/webviews/DeductionWay'
 import RecordList from '@/webviews/RecordList'
 import Create from '@/webviews/Create'
+import request from '@/api'
+import store from '@/webstore'
+import axios from '@/api/axios'
+import { ORDER_STATE } from '@/constant'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
       name: 'List',
-      component: List
+      component: List,
+      props: { orderState: ORDER_STATE.VALID }
+    },
+    {
+      path: '/CloseList',
+      name: 'List',
+      component: List,
+      props: { orderState: ORDER_STATE.CLOSE }
     },
     {
       path: '/Detail',
@@ -37,3 +48,20 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  if (axios.defaults.headers.userId) {
+    next()
+    return
+  }
+  try {
+    const userInfo = await request.getUserInfo()
+    store.commit('userInfo/setUserInfo', userInfo)
+    axios.defaults.headers.userId = userInfo._id
+    next()
+  } catch (err) {
+    next('/')
+  }
+})
+
+export default router
