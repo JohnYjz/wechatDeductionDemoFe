@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import List from '@/webviews/List'
+import ListPage from '@/webviews/List'
 import Detail from '@/webviews/Detail'
 import DeductionWay from '@/webviews/DeductionWay'
 import RecordList from '@/webviews/RecordList'
 import Create from '@/webviews/Create'
-import Error from '@/webviews/Error'
+import ErrorPage from '@/webviews/Error'
 import request from '@/api'
 import store from '@/webstore'
 import axios from '@/api/axios'
@@ -18,13 +18,13 @@ const router = new Router({
     {
       path: '/',
       name: 'List',
-      component: List,
+      component: ListPage,
       props: { orderState: ORDER_STATE.VALID }
     },
     {
       path: '/CloseList',
-      name: 'List',
-      component: List,
+      name: 'CloseList',
+      component: ListPage,
       props: { orderState: ORDER_STATE.CLOSE }
     },
     {
@@ -50,7 +50,7 @@ const router = new Router({
     {
       path: '/Error',
       name: 'Error',
-      component: Error
+      component: ErrorPage
     }
   ]
 })

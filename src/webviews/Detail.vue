@@ -22,7 +22,7 @@
                     <label class="weui-form-preview__label">扣款方式</label>
                     <span class="weui-form-preview__value">
                       {{payWayMap[orderDetail.payId]}}
-                      <a href="javascript:;" @click="goToDeductionWay()">修改</a>
+                      <a href="javascript:;" @click="goToDeductionWay">修改</a>
                     </span>
                 </div>
                 <div class="weui-form-preview__item">

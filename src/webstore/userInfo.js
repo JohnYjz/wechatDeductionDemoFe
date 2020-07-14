@@ -24,7 +24,6 @@ const userInfo = {
       state.userId = _id
       state.payWays = payWays
       state.userName = userName
-      console.log(state.userId, payWays)
     }
   }
 }

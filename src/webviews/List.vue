@@ -15,9 +15,9 @@
         </div>
     </div>
     <div class="weui-footer">
-        <p class="weui-footer__links">
-            <a href="javascript:home();" class="weui-footer__link" @click="goToCloseList">已关闭服务</a>
-        </p>
+      <a v-if="!isCloseList" href="javascript:;" class="weui-footer__link" @click="goToCreate">点击创建mock</a>
+      <a v-if="isCloseList" href="javascript:;" class="weui-footer__link" @click="goToList">点击查看已开通服务</a>
+      <a v-else href="javascript:;" class="weui-footer__link" @click="goToCloseList">点击查看已关闭服务</a>
     </div>
   </div>
 </template>
@@ -29,12 +29,18 @@ export default {
   name: 'List',
   props: {
     orderState: {
-      type: String
+      type: Number
     }
   },
   data () {
     return {
-      orders: []
+      orders: [],
+      picUrl: ''
+    }
+  },
+  computed: {
+    isCloseList () {
+      return this.orderState === ORDER_STATE.CLOSE
     }
   },
   created () {
@@ -42,12 +48,9 @@ export default {
   },
   methods: {
     async initPage () {
-      if (this.orderState === ORDER_STATE.VALID) {
+      if (!this.isCloseList) {
         const data = await this.$request.getDeductionOrders()
-        for (let i = 0; i < 20; i++) {
-          this.orders.push(data[0])
-        }
-        // this.orders = data
+        this.orders = data
       } else {
         const data = await this.$request.getDeductionCloseOrders()
         this.orders = data
@@ -58,6 +61,12 @@ export default {
     },
     goToCloseList () {
       this.$router.push('/closeList')
+    },
+    goToList () {
+      this.$router.push('/')
+    },
+    goToCreate () {
+      this.$router.push('/Create')
     }
   }
 }
