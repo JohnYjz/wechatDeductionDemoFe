@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="weui-panel__bd">
+  <div class="flex-wrapper">
+    <div class="weui-panel__bd flex-body">
         <div class="weui-media-box weui-media-box_small-appmsg">
             <div class="weui-cells" v-for="order in orders" :key="order._id">
                 <a class="weui-cell weui-cell_active weui-cell_access weui-cell_example" href="javascript:;" @click="goToDetail(order)">
@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <div class="weui-footer weui-footer_fixed-bottom">
+    <div class="weui-footer">
         <p class="weui-footer__links">
             <a href="javascript:home();" class="weui-footer__link" @click="goToCloseList">已关闭服务</a>
         </p>
@@ -44,7 +44,10 @@ export default {
     async initPage () {
       if (this.orderState === ORDER_STATE.VALID) {
         const data = await this.$request.getDeductionOrders()
-        this.orders = data
+        for (let i = 0; i < 20; i++) {
+          this.orders.push(data[0])
+        }
+        // this.orders = data
       } else {
         const data = await this.$request.getDeductionCloseOrders()
         this.orders = data
@@ -60,5 +63,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 </style>

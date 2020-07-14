@@ -5,6 +5,7 @@ import Detail from '@/webviews/Detail'
 import DeductionWay from '@/webviews/DeductionWay'
 import RecordList from '@/webviews/RecordList'
 import Create from '@/webviews/Create'
+import Error from '@/webviews/Error'
 import request from '@/api'
 import store from '@/webstore'
 import axios from '@/api/axios'
@@ -45,6 +46,11 @@ const router = new Router({
       path: '/Create',
       name: 'Create',
       component: Create
+    },
+    {
+      path: '/Error',
+      name: 'Error',
+      component: Error
     }
   ]
 })
@@ -60,7 +66,7 @@ router.beforeEach(async (to, from, next) => {
     axios.defaults.headers.userId = userInfo._id
     next()
   } catch (err) {
-    next('/')
+    next('/Error')
   }
 })
 

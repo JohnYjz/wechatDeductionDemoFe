@@ -1,5 +1,5 @@
 <template>
-  <div class="base-page-wrapper">
+  <div class="base-page-wrapper page">
     <slot></slot>
   </div>
 </template>
@@ -22,6 +22,5 @@ export default {
   background-color: #ededed;
   height: 100vh;
   overflow-y: auto;
-  padding-top: 5px;
 }
 </style>

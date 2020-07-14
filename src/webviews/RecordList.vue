@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div v-if="records.length">
+  <div class="flex-wrapper">
+    <div v-if="records.length" class="flex-body">
       <div v-for="record in records" :key="record.id">
         <h4 class="record-list-title">{{record.month}}</h4>
         <div class="weui-panel__bd">
@@ -22,11 +22,11 @@
       </div>
     </div>
     <p v-else class="hint-text center">没有记录</p>
-    <div class="button-sp-area cell weui-footer_fixed-bottom">
+    <div class="button-sp-area cell">
       <div class="weui-cell weui-cell_active record-list-mock-new">
         <div class="weui-cell__hd"><label class="weui-label">金额</label></div>
         <div class="weui-cell__bd">
-            <input id="js_input" class="weui-input" placeholder="输入金额（数字）" v-model="amount"/>
+            <input id="js_input" class="weui-input" type="number" placeholder="输入金额（数字）" v-model="amount"/>
         </div>
       </div>
       <a href="javascript:" class="weui-btn_cell weui-btn_cell-default" @click="create">点击添加一条记录（mock）</a>
@@ -53,6 +53,7 @@ export default {
       this.records = data
     },
     async create () {
+      if (!this.amount) return
       const id = this.$route.query.id
       const data = {
         order: id,
