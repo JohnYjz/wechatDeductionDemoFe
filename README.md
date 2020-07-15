@@ -36,7 +36,7 @@ src/
 ```
 
 ## 设计文档
-
+``` bash
 该项目分为7个页面
 1、已开通的扣费服务列表页/，对应项目中 src/webviews/List.vue，其组件状态设orderState === 'valid'
 2、已关闭的扣费服务列表页/CloseList，复用 src/webviews/List.vue，其组件状态设orderState === 'close'
@@ -51,4 +51,4 @@ src/
 关于登录：
 为了精简项目，该项目的登录用mock方式获得。
 进入页面后会先请求一个user/info接口获得用户信息，该接口服务端采用mock的方式一定会返回一个用户信息，前端用该用户信息设置userId即登录成功
-
+```
