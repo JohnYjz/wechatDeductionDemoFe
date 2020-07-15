@@ -35,7 +35,7 @@ src/
   main.js
 ```
 
-## 设计文档
+## 页面逻辑说明
 
 ### 该项目分为7个页面  
   1. 已开通的扣费服务列表页/，对应项目中 src/webviews/List.vue，其组件状态设orderState === 'valid'  
