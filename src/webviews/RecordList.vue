@@ -62,7 +62,11 @@ export default {
         amount: this.amount
       }
       await this.$request.createRecord(data)
+      this.resetForm()
       this.initPage()
+    },
+    resetForm () {
+      this.amount = ''
     }
   }
 }

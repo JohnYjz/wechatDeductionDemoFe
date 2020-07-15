@@ -56,6 +56,10 @@ const router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
+  if (to.path === '/Error') {
+    next()
+    return
+  }
   if (axios.defaults.headers.userId) {
     next()
     return
