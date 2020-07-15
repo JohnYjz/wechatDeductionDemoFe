@@ -12,11 +12,11 @@
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">签约时间</label>
-                    <span class="weui-form-preview__value">{{orderDetail.meta.createAt | formatDate}}</span>
+                    <span class="weui-form-preview__value">{{(orderDetail.meta && orderDetail.meta.createAt) | formatDate}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">开通账号</label>
-                    <span class="weui-form-preview__value">{{orderDetail.user.userName}}</span>
+                    <span class="weui-form-preview__value">{{orderDetail.user && orderDetail.user.userName}}</span>
                 </div>
                 <div class="weui-form-preview__item">
                     <label class="weui-form-preview__label">扣款方式</label>

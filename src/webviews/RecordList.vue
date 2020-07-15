@@ -11,7 +11,7 @@
                           <div class="weui-cell__hd"></div>
                           <div class="weui-cell__bd weui-cell_primary">
                             <h4 class="weui-media-box__title">{{record.bussinessName}}</h4>
-                            <p class="weui-media-box__desc">{{record.meta.createAt | formatDate}}</p>
+                            <p class="weui-media-box__desc">{{(record.meta && record.meta.createAt) | formatDate}}</p>
                           </div>
                           <span class="weui-cell__ft">
                             {{record.amount}}
