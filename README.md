@@ -28,7 +28,7 @@ src/
   constant/       常量定义
   router/         路由配置
   style/          样式
-  utils/          工具
+  utils/          涉及一些filters和一些工具方法，工具方法最终通过main.js挂在Vue.prototype.$utils下
   webstore/       vuex的数据模块，用户的个人信息存放
   webviews/       页面组件
   app.vue
